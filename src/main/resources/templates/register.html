@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<!--<head th:replace="fragments :: head"></head>-->
+<body>
+<h1 th:text="${title}">Default Title</h1>
+<form method="post" th:action="@{/register}" th:object="${user}">
+    <div>
+        <label th:for="fullName">Full Name</label>
+        <input th:field="*{fullName}"/>
+        <div class="error" th:errors="*{fullName}"></div>
+    </div>
+    <div>
+        <label th:for="email">Email</label>
+        <input th:field="*{email}"/>
+        <div class="error" th:errors="*{email}"></div>
+    </div>
+    <div>
+        <label th:for="password">Password</label>
+        <input th:field="*{password}" type="password"/>
+        <div class="error" th:errors="*{password}"></div>
+    </div>
+    <div>
+        <label th:for="verifyPassword">Verify Password</label>
+        <input th:field="*{verifyPassword}" type="password"/>
+        <div class="error" th:errors="*{verifyPassword}"></div>
+    </div>
+
+    <input type="submit" value="Register"/>
+</form>
+<a href="/login">Log in instead</a>
+</body>
+</html>
