@@ -1,7 +1,8 @@
 package deliverybuddy.controllers;
 
+import deliverybuddy.models.user.EmailExistsException;
 import deliverybuddy.models.user.UserDto;
-import deliverybuddy.models.user.IUserService;
+import deliverybuddy.models.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
-public class AuthenticationController {
-
+public class AuthenticationController extends AbstractBaseController {
 
     @Autowired
-    IUserService iUserService;
+    UserRepository userRepository;
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(Model model) {
@@ -29,21 +30,23 @@ public class AuthenticationController {
 
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(@ModelAttribute @Valid UserDto userDto, Errors errors) {
+    public String register(@ModelAttribute @Valid UserDto userDto, Errors errors) throws EmailExistsException {
 
-        String password = userDto.getPassword();
-        String verPassword = userDto.getVerifyPassword();
-        if (password.equals(verPassword)) {
-            iUserService.save(userDto);
-            return "redirect:/hello";
+        try {
+            userService.save(userDto);
+        } catch (EmailExistsException e) {
+            /*errors.rejectValue("email", "email.alreadyexists", e.getMessage());*/
+            return "register";
         }
-
-        return "/register";
+        return "redirect:/hello";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model) {
+    public String login(Model model, Principal principal) {
+
+        if (principal != null)
+            return "redirect:/hello";
+
         return "login";
     }
-
 }

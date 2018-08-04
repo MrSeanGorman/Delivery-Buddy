@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface UserRepo extends CrudRepository<User, Integer> {
+public interface UserRepository extends CrudRepository<User, Integer> {
 
     public User findByEmail(String email);
 

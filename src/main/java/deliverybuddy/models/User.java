@@ -1,6 +1,9 @@
 package deliverybuddy.models;
 
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,12 +17,16 @@ public class User {
     private int id;
 
     @NotNull
+    @NotEmpty
+    @Email
     private String email;
 
     @NotNull
+    @NotEmpty
     private String fullName;
 
     @NotNull
+    @NotEmpty
     private String password;
 
     public User() {}
@@ -54,12 +61,8 @@ public class User {
         this.password = password;
     }
 
-
     public int getId() {
         return this.id;
     }
-
-
-
 
 }
