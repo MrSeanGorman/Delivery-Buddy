@@ -22,20 +22,19 @@ public class AuthenticationController extends AbstractBaseController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(Model model) {
-        UserDto userDto = new UserDto();
-        model.addAttribute("user", userDto);
+        model.addAttribute(new UserDto());
         model.addAttribute("title", "Register");
         return "register";
     }
 
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(@ModelAttribute @Valid UserDto userDto, Errors errors) throws EmailExistsException {
+    public String register(@ModelAttribute @Valid UserDto userDto, Errors errors) {
 
         try {
             userService.save(userDto);
-        } catch (EmailExistsException e) {
-            /*errors.rejectValue("email", "email.alreadyexists", e.getMessage());*/
+        } catch (EmailExistsException emailExistsException) {
+            errors.rejectValue("email", "email.alreadyexists", emailExistsException.getMessage());
             return "register";
         }
         return "redirect:/hello";
@@ -44,9 +43,11 @@ public class AuthenticationController extends AbstractBaseController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, Principal principal) {
 
-        if (principal != null)
+        if (principal != null) {
             return "redirect:/hello";
+        }
 
+        model.addAttribute("title", "Log In");
         return "login";
     }
 }

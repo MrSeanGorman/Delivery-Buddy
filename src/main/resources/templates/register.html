@@ -3,7 +3,7 @@
 <!--<head th:replace="fragments :: head"></head>-->
 <body>
 <h1 th:text="${title}">Default Title</h1>
-<form method="post" th:action="@{/register}" th:object="${user}">
+<form method="post" th:action="@{/register}" th:object="${userDto}">
     <div>
         <label th:for="fullName">Full Name</label>
         <input th:field="*{fullName}"/>

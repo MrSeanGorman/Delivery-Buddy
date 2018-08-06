@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class User {
@@ -29,12 +31,21 @@ public class User {
     @NotEmpty
     private String password;
 
+    @NotNull
+    private Boolean enabled = true;
+
     public User() {}
 
     public User(String fullName, String email, String password) {
         this.fullName = fullName;
         this.email = email;
         this.password = password;
+    }
+
+    public List<String> getRoles() {
+        ArrayList<String> roles = new ArrayList<>();
+        roles.add("ROLE_USER");
+        return roles;
     }
 
     public String getEmail() {
@@ -65,4 +76,11 @@ public class User {
         return this.id;
     }
 
+    public Boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 }

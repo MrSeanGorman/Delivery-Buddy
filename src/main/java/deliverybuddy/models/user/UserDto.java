@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 public class UserDto {
 
     @NotNull
-    @NotEmpty
     @Email
     private String email;
 

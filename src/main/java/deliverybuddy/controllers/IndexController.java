@@ -14,18 +14,18 @@ public class IndexController extends AbstractBaseController {
     public String hello(Model model, Principal principal) {
 
         User user = userService.findByEmail(principal.getName());
-        model.addAttribute("user", user);
         model.addAttribute("title", "Hello Test");
+        model.addAttribute("user", user);
 
         return "hello";
     }
 
     @RequestMapping(value = "/")
-    public String index(Principal user) {
+    public String index(Principal principal) {
 
-        if (user == null) {
+/*        if (principal == null) {
             return "redirect:/login";
-        } else { return "/hello"; }
+        } else { */return "redirect:/hello"; /*}*/
     }
 
 }

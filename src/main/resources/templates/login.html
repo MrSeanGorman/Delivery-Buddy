@@ -3,20 +3,21 @@
 <!--<head th:replace="fragments :: head"></head>-->
 <body>
 <h1 th:text="${title}">Default Title</h1>
-<form method="post" th:action="@{/login}" th:object="${user}">
+<form method="post" th:action="@{/login}">
 
     <div>
-        <label th:for="email">Email</label>
-        <input th:field="*{email}"/>
-        <div class="error" th:errors="*{email}"></div>
+        <label for="email">Email</label>
+        <input id="email" name="email"/>
+<!--        <div class="error" th:errors="*{email}"></div>-->
     </div>
     <div>
-        <label th:for="password">Password</label>
-        <input th:field="*{password}" type="password"/>
-        <div class="error" th:errors="*{password}"></div>
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" />
+<!--        <div class="error" th:errors="*{password}"></div>-->
     </div>
+    <!-- TODO Remember Me-->
     <div>
-    <input type="submit" value="Login"/>
+    <input type="submit" value="Log In"/>
     </div>
 </form>
 <a href="/register">Register a new account</a>
