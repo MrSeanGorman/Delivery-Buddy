@@ -21,11 +21,9 @@ public class IndexController extends AbstractBaseController {
     }
 
     @RequestMapping(value = "/")
-    public String index(Principal principal) {
+    public String index() {
 
-/*        if (principal == null) {
-            return "redirect:/login";
-        } else { */return "redirect:/hello"; /*}*/
+        return "redirect:/hello";
     }
 
 }

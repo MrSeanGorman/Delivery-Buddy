@@ -31,6 +31,9 @@ public class AuthenticationController extends AbstractBaseController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(@ModelAttribute @Valid UserDto userDto, Errors errors) {
 
+        if (errors.hasErrors()) {
+            return "register";
+        }
         try {
             userService.save(userDto);
         } catch (EmailExistsException emailExistsException) {

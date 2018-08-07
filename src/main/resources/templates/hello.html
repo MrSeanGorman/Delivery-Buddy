@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<!--<head th:replace="fragments :: head"></head>-->
+<head th:replace="fragments :: head"></head>
 <body>
-<h1 th:text="${title}">Default Title</h1>
+<div th:replace="fragments :: header"></div>
+
 <div th:object="${user}">
     <p>Hello <span th:text="*{fullName}"></span>!</p>
 </div>

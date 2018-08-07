@@ -8,19 +8,20 @@ import javax.validation.constraints.NotNull;
 public class UserDto {
 
     @NotNull
-    @Email
+    @Email(message = "Invalid email address")
     private String email;
 
     @NotNull
     @NotEmpty
+    /*TODO Size constraints*/
     private String fullName;
 
     @NotNull
     @NotEmpty
+    /*TODO password constraints*/
     private String password;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Passwords do not match")
     private String verifyPassword;
 
     public UserDto() {}

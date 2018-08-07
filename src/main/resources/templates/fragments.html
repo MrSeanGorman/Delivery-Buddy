@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${title}"></title>
+</head>
+<body>
+
+<div th:fragment="header">
+
+    <h1 th:text="${title}"></h1>
+
+    <div th:if="${#authorization.expression('isAuthenticated()')}">
+        <form th:action="@{/logout}" method="post" name="logoutForm"></form>
+        <a href="#" onclick="document.logoutForm.submit()">Log Out</a>
+    </div>
+
+</div>
+
+</body>
+</html>
+
